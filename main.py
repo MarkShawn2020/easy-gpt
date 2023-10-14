@@ -23,7 +23,10 @@ def streaming_response(response: Generator[list | OpenAIObject | dict, Any, None
         yield json.dumps(chunk)
 
 
-@app.post("/v1/chat/completions")
+@app.post(
+    "/v1/chat/completions",
+    description="这里占位的 api_key 是从环境变量中读取的南川自有key，仅供前端与调试使用，请不要用于任何其他项目"
+)
 async def create_chat_completion(body: ChatCompletionBody):
     try:
         response = openai.ChatCompletion.create(**body.model_dump())
