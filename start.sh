@@ -1,4 +1,9 @@
 # ref: https://python-poetry.org/docs/basic-usage/#activating-the-virtual-environment
+
+# list envs
+poetry env list
+
+poetry env use 3.11
 source $(poetry env info --path)/bin/activate
 
 poetry install
