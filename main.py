@@ -10,8 +10,6 @@ from sse_starlette import EventSourceResponse
 
 from src.schema.openai import ChatCompletionBody
 
-dotenv.load_dotenv()
-
 app = FastAPI(
     version='/v1',
     title='EasyGPT - An OpenAI Wrapper',

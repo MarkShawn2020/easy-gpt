@@ -1,7 +1,10 @@
 import os
 from enum import StrEnum
 
+import dotenv
 from pydantic import BaseModel
+
+dotenv.load_dotenv()
 
 
 class Model(StrEnum):
