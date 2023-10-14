@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "easy-gpt"
+version = "0.1.0"
+description = ""
+authors = ["xingjian <xingjian@baichuan-inc.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.103.2"
+uvicorn = "^0.23.2"
+backoff = "^2.2.1"
+tiktoken = "^0.5.1"
+openai = "^0.28.1"
+sse-starlette = "^1.6.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
