@@ -8,7 +8,7 @@ import os.path
 import sys
 from logging.handlers import TimedRotatingFileHandler
 
-from src.libs.path import LOGS_DIR
+from src.lib.path import LOGS_DIR
 
 FORMATTER = logging.Formatter(
     # cons: too annoying when log like: `[regenerate_field.py:regenerate_field:regenerate:16]`

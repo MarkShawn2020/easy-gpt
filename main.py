@@ -8,14 +8,14 @@ from fastapi import FastAPI, HTTPException
 from openai.openai_object import OpenAIObject
 from sse_starlette import EventSourceResponse
 
-from src.schema import ChatCompletionBody
+from src.schema.openai import ChatCompletionBody
 
 dotenv.load_dotenv()
 
 app = FastAPI(
     version='/v1',
-    title="EasyGPT - An OpenAI Wrapper",
-    summary="EasyGPT is an OpenAI wrapper for restful/sdk usage, which is powered by FastAPI, SSE, Pydantic, authored by MarkShawn2020, since Oct 14th, 2023.",
+    title='EasyGPT - An OpenAI Wrapper',
+    description='EasyGPT is an OpenAI wrapper for restful/sdk usage, which is powered by FastAPI, SSE, Pydantic, authored by MarkShawn2020, since Oct 14th, 2023.'
 )
 
 
