@@ -12,17 +12,7 @@ from fastapi import HTTPException
 from sse_starlette import EventSourceResponse
 from starlette import status
 
-from src.config.msgs import ERR_MSG_NEED_CHARGE
-from src.config.openai import CHATGPT_TOKENS_MAX_SEND, CHATGPT_MESSAGE_TOKEN_INTERVAL
-from src.ds.general import ID
-from src.ds.openai.chatgpt import ChatgptModelType, ChatgptRoleType, DChatgptMessage, IChatgptConversationCreate, \
-    IChatgptConversation
-from src.ds.user import IUser
-from src.ds.website import IWebMessage
-from src.libs.db import db_insert_msg, db_push_bill_record, db_insert, openai_users_coll, conversations_coll, \
-    messages_coll, users_coll
 from src.libs.log import getLogger
-from src.libs.openai import openai
 
 logger = getLogger('libs:chatgpt')
 

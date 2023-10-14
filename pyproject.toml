@@ -6,13 +6,16 @@ authors = ["xingjian <xingjian@baichuan-inc.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.11"
 fastapi = "^0.103.2"
 uvicorn = "^0.23.2"
 backoff = "^2.2.1"
 tiktoken = "^0.5.1"
 openai = "^0.28.1"
 sse-starlette = "^1.6.5"
+python-dotenv = "^1.0.0"
+urllib3 = "1.26.6"
+pydantic = "^2.4.2"
 
 
 [build-system]
