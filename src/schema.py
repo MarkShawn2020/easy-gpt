@@ -1,0 +1,28 @@
+import os
+from enum import StrEnum
+
+from pydantic import BaseModel
+
+
+class Model(StrEnum):
+    gpt_3_5_turbo = 'gpt-3.5-turbo'
+    gpt_4 = 'gpt-4'
+
+
+class Role(StrEnum):
+    user = 'user'
+    assistant = 'assistant'
+    system = 'system'
+    function = 'function'
+
+
+class Message(BaseModel):
+    content: str
+    role: Role
+
+
+class ChatCompletionBody(BaseModel):
+    api_key: str = os.environ.get('OPENAI_API_KEY')
+    model: Model = Model.gpt_3_5_turbo
+    messages: list[Message]
+    stream: bool
