@@ -25,7 +25,7 @@ class Message(BaseModel):
 
 
 class ChatCompletionBody(BaseModel):
-    api_key: str = os.environ.get('OPENAI_API_KEY')
+    api_key: str
     model: Model = Model.gpt_3_5_turbo
     messages: list[Message]
     stream: bool
