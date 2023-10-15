@@ -14,15 +14,17 @@ from src.schema.openai import ChatCompletionBody, Role, Message, Model
 
 def streaming_response(response: Generator[list | OpenAIObject | dict, Any, None]):
     for chunk in response:
-        print("data: ", chunk)
+        # print("data: ", chunk)
         yield json.dumps(chunk)
 
 
 def call_pure_gpt(body: ChatCompletionBody):
     # openai.api_base = 'http://49.51.186.136:83/v1/'
+    print("messages: ", body.messages)
 
     # todo: replace using Bearer
     openai.api_key = os.environ.get('OPENAI_API_KEY')
+
     try:
         response = openai.ChatCompletion.create(**body.model_dump())
 
@@ -30,7 +32,7 @@ def call_pure_gpt(body: ChatCompletionBody):
         if body.stream:
             response = EventSourceResponse(streaming_response(response))
             response.ping_interval = 600  # avoid `ping`
-
+        # print(response)
         return response
 
     except Exception as e:
