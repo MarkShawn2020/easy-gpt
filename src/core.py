@@ -1,4 +1,5 @@
 import json
+import os
 from typing import Generator, Any
 
 import openai
@@ -18,9 +19,10 @@ def streaming_response(response: Generator[list | OpenAIObject | dict, Any, None
 
 
 def call_pure_gpt(body: ChatCompletionBody):
-    # body.base_url = 'http://49.51.186.136:83/v1/'
     # openai.api_base = 'http://49.51.186.136:83/v1/'
 
+    # todo: replace using Bearer
+    openai.api_key = os.environ.get('OPENAI_API_KEY')
     try:
         response = openai.ChatCompletion.create(**body.model_dump())
 

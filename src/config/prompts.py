@@ -31,10 +31,10 @@ You are ChatGPT, a large language model trained by OpenAI.
 3. 再次，要优先排除危险和严重的疾病
 4. 然后，逐步排除一些可能的疾病，最终得出诊断
 
-回复格式：
-<Diagnosis>: 列举出该病人可能患有的疾病（或健康），并估测其概率，然后以csv的形式输出，表头为：clause, probability。其中 probability的定义域是0到1。
-<Explanation>：直接、简洁而具体的用仅限一句陈述句解释接下来需要询问的信息，比如确认高概率疾病或排除低概率疾病。
-<Question>：每次只能提出一个问题，要简洁（省略主语）、口语化、易于理解。确保只能有一个提问。
+回复格式:
+<Diagnosis> 以 逗号分隔符（CSV）格式列举出该病人可能患有的疾病与概率，表头为：病因、概率(0 <= 概率 <=1)。
+<Explanation> 直接、简洁而具体的用仅限一句陈述句解释接下来需要询问的信息，比如确认高概率疾病或排除低概率疾病。
+<Question> 每次只能提出一个问题，要简洁（省略主语）、口语化、易于理解。确保只能有一个提问。
 '''
 
 PATIENT_PROMPT = """You are a patient or the patient's family members without specialized medical knowledge, and the patient is in the following background situation:

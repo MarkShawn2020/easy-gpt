@@ -21,13 +21,12 @@ class Role(StrEnum):
 
 
 class Message(BaseModel):
-    content: str
-    role: Role
+    content: str = "突然头疼是怎么回事？"
+    role: Role = Role.user
 
 
 class ChatCompletionBody(BaseModel):
-    api_key: str
     temperature: float = .01
     model: Model = Model.medical_gpt
     messages: list[Message]
-    stream: bool
+    stream: bool = False
