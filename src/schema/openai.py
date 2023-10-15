@@ -28,6 +28,6 @@ class Message(BaseModel):
 class ChatCompletionBody(BaseModel):
     api_key: str
     temperature: float = .01
-    model: Model = Model.gpt_3_5_turbo
+    model: Model = Model.medical_gpt
     messages: list[Message]
     stream: bool
