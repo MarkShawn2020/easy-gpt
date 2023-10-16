@@ -10,6 +10,7 @@ dotenv.load_dotenv()
 class Model(StrEnum):
     gpt_3_5_turbo = 'gpt-3.5-turbo'
     gpt_4 = 'gpt-4'
+    medical_gpt = 'medical-gpt'
 
 
 class Role(StrEnum):
@@ -20,12 +21,12 @@ class Role(StrEnum):
 
 
 class Message(BaseModel):
-    content: str
-    role: Role
+    content: str = "突然头疼是怎么回事？"
+    role: Role = Role.user
 
 
 class ChatCompletionBody(BaseModel):
-    api_key: str = os.environ.get('OPENAI_API_KEY')
-    model: Model = Model.gpt_3_5_turbo
+    temperature: float = .01
+    model: Model = Model.medical_gpt
     messages: list[Message]
-    stream: bool
+    stream: bool = False
