@@ -4,12 +4,10 @@ from typing import Generator, Any
 
 import openai
 from fastapi import HTTPException
-
 from openai.openai_object import OpenAIObject
 from sse_starlette import EventSourceResponse
 
-from src.config.prompts import NURSE_PROMPT
-from src.schema.openai import ChatCompletionBody, Role, Message, Model
+from src.schema.openai import ChatCompletionBody
 
 
 def streaming_response(response: Generator[list | OpenAIObject | dict, Any, None]):
@@ -18,12 +16,14 @@ def streaming_response(response: Generator[list | OpenAIObject | dict, Any, None
         yield json.dumps(chunk)
 
 
-def call_pure_gpt(body: ChatCompletionBody):
+def call_pure_gpt(
+        api_key: str,
+        body: ChatCompletionBody
+):
     # openai.api_base = 'http://49.51.186.136:83/v1/'
     print("messages: ", body.messages)
 
-    # todo: replace using Bearer
-    openai.api_key = os.environ.get('OPENAI_API_KEY')
+    openai.api_key = api_key
 
     try:
         response = openai.ChatCompletion.create(**body.model_dump())
@@ -37,13 +37,3 @@ def call_pure_gpt(body: ChatCompletionBody):
 
     except Exception as e:
         raise HTTPException(400, str(e))
-
-
-def call_medical_gpt(body: ChatCompletionBody):
-    body.messages.insert(
-        0,
-        Message.model_validate({"role": "system", "content": NURSE_PROMPT})
-    )
-    body.model = Model.gpt_4
-    response = call_pure_gpt(body)
-    return response
