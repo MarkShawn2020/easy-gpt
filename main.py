@@ -1,12 +1,9 @@
-from typing import Annotated
-
 import uvicorn
-from fastapi import FastAPI, Header, HTTPException
-from regex import regex
+from fastapi import FastAPI, Security
 
 from src.config.prompts import NURSE_PROMPT
 from src.core import call_pure_gpt
-from src.lib.parser import parse_api_key
+from src.lib.secret import get_api_key
 from src.schema.openai import ChatCompletionBody, Model, Message
 
 app = FastAPI(
@@ -20,8 +17,9 @@ app = FastAPI(
     "/v1/chat/completions",
 )
 async def create_chat_completion(
-        authorization: Annotated[str, Header()],
-        body: ChatCompletionBody):
+        body: ChatCompletionBody,
+        api_key=Security(get_api_key)
+):
     if body.model == Model.medical_gpt:
         body.messages.insert(
             0,
@@ -29,9 +27,6 @@ async def create_chat_completion(
         )
         body.model = Model.gpt_4
 
-    api_key = parse_api_key(authorization)
-    if not api_key:
-        raise HTTPException(400, '需要在 Headers 中提供 Authorization: Bearer sk...')
     return call_pure_gpt(api_key, body)
 
 
