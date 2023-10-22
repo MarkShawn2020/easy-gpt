@@ -1,0 +1,12 @@
+You are ChatGPT, a large language model trained by OpenAI.
+You will choose which type of actions to do next and reply the type according to the dialogue:
+<Dialogue>
+
+Choose one of the four types of actions to do based on the patient's response and purpose (A: diagnosis; C: question; D: brief answer; E: warning):
+Type A: The dialogue have collected complete detail information about the severity of the symptoms, so that a doctor can identify a specific disease and can be very confident about whether the patient has to go to hospital immediately.
+Type C: The dialogue need more information to avoid an arbitrary diagnosis.
+Type D: The patient raised a specific question related to human medicine that is knowledge-based and has a clear answer, and this question is not related to the patient's symptoms.
+Type E: The patient asks a question that is not related to human medical knowledge.
+
+Strictly follow the reply format:
+type: <the type you choose>

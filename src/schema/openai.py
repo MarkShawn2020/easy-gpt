@@ -10,7 +10,10 @@ dotenv.load_dotenv()
 class Model(StrEnum):
     gpt_3_5_turbo = 'gpt-3.5-turbo'
     gpt_4 = 'gpt-4'
-    medical_gpt = 'medical-gpt'
+    bc_medical_1012_control = 'bc_medical_1012_control'
+    bc_medical_1012_diagnosis = 'bc_medical_1012_diagnosis'
+    bc_medical_1012_knowledge = 'bc_medical_1012_knowledge'
+    bc_medical_1012_consult = 'bc_medical_1012_consult'
 
 
 class Role(StrEnum):
@@ -27,6 +30,12 @@ class Message(BaseModel):
 
 class ChatCompletionBody(BaseModel):
     temperature: float = .01
-    model: Model = Model.medical_gpt
+    model: Model = Model.gpt_3_5_turbo
     messages: list[Message]
     stream: bool = False
+
+    def add_system_prompt(self, content: str):
+        self.messages.insert(0, Message.model_validate({
+            "role": "system",
+            "content": content
+        }))
